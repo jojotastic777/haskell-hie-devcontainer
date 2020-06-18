@@ -21,4 +21,6 @@ RUN apk update \
     && wget -q -O /tmp/common-setup.sh $COMMON_SCRIPT_SOURCE \
     && if [ "$COMMON_SCRIPT_SHA" != "dev-mode" ]; then echo "$COMMON_SCRIPT_SHA /tmp/common-setup.sh" | sha256sum -c - ; fi \
     && /bin/ash /tmp/common-setup.sh "$INSTALL_ZSH" "$USERNAME" "$USER_UID" "$USER_GID" \
-    && rm /tmp/common-setup.sh
+    && rm /tmp/common-setup.sh \
+    && curl -sSL https://get.haskellstack.org/ | sh \
+    && echo "export PATH=$PATH:/usr/local/bin" >> /home/$USERNAME/.bashrc
